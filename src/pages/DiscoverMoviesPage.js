@@ -1,4 +1,4 @@
-//import axios from "axios";
+import axios from "axios";
 import { useState } from "react";
 
 export default function DiscoverMoviesPage() {
@@ -10,15 +10,15 @@ export default function DiscoverMoviesPage() {
   const [searchText, set_searchText] = useState("");
 
   const search = async () => {
-    set_searchState({ status: "searching..." });
+    set_searchState({ status: "searching" });
     //update state to searching...
     console.log("Start searching for:", searchText);
 
     const queryParam = encodeURIComponent(searchText);
     //add search api call with paramter OPTION A
-    const data = await fetch(
+    const data = await axios.get(
       `https://omdbapi.com/?apikey=8679fb8e&s=${queryParam}`
-    ).then((r) => /*update state to search completed */ r.json());
+    );
     set_searchState({ status: "done", data: data.Search });
     //log out your response
     console.log("what is the response?:", data);
@@ -34,6 +34,17 @@ export default function DiscoverMoviesPage() {
         />
         <button onClick={search}>Search</button>
       </p>
+
+      {searchState.status === "idle" ? (
+        <p>Search your favorite movies</p>
+      ) : null}
+      {searchState.status === "searching" ? <p>Loading ...</p> : null}
+      {searchState.status === "done" ? (
+        <div>
+          <h2>Search Results:</h2>
+          <div></div>
+        </div>
+      ) : null}
     </div>
   );
 }
