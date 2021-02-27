@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 export default function DiscoverMoviesPage() {
-  const [status, set_statusState] = useState();
+  const [searchState, set_searchState] = useState({ status: "idle" });
   //idle
   //searching...
   //done
@@ -10,6 +10,7 @@ export default function DiscoverMoviesPage() {
   const [searchText, set_searchText] = useState("");
 
   const search = async () => {
+    set_searchState({ status: "searching..." });
     //update state to searching...
     console.log("Start searching for:", searchText);
 
@@ -18,6 +19,7 @@ export default function DiscoverMoviesPage() {
     const data = await fetch(
       `https://omdbapi.com/?apikey=8679fb8e&s=${queryParam}`
     ).then((r) => /*update state to search completed */ r.json());
+    set_searchState({ status: "done", data: data.Search });
     //log out your response
     console.log("what is the response?:", data);
   };
