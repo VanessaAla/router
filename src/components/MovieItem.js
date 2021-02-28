@@ -1,4 +1,10 @@
 import React from "react";
-export default function MovieItem() {
-  return <div></div>;
+import { Link } from "react-router-dom";
+
+export default function MovieItem(props) {
+  return (
+    <div>
+      <p>{props.title}</p>
+    </div>
+  );
 }

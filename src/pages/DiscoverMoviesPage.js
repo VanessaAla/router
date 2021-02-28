@@ -1,27 +1,24 @@
 import axios from "axios";
 import { useState } from "react";
+import MovieItem from "../components/MovieItem";
 
 export default function DiscoverMoviesPage() {
   const [searchState, set_searchState] = useState({ status: "idle" });
-  //idle
-  //searching...
-  //done
-
   const [searchText, set_searchText] = useState("");
+  const [movieState, set_movieState] = useState([]);
 
   const search = async () => {
     set_searchState({ status: "searching" });
-    //update state to searching...
-    console.log("Start searching for:", searchText);
 
     const queryParam = encodeURIComponent(searchText);
-    //add search api call with paramter OPTION A
-    const data = await axios.get(
+
+    const response = await axios.get(
       `https://omdbapi.com/?apikey=8679fb8e&s=${queryParam}`
     );
-    set_searchState({ status: "done", data: data.Search });
-    //log out your response
-    console.log("what is the response?:", data);
+    console.log("response", response);
+    set_searchState({ status: "done" });
+    set_movieState(response.data.Search);
+    set_searchText("");
   };
 
   return (
@@ -42,7 +39,11 @@ export default function DiscoverMoviesPage() {
       {searchState.status === "done" ? (
         <div>
           <h2>Search Results:</h2>
-          <div></div>
+          <div>
+            {movieState.map((movie, index) => (
+              <MovieItem key={index} title={movie.Title} />
+            ))}
+          </div>
         </div>
       ) : null}
     </div>
