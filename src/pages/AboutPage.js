@@ -1,3 +1,3 @@
 export default function AboutPage() {
-  return <div>This is the AboutPage</div>;
+  return <div>Find all the movies you are looking for!</div>;
 }
