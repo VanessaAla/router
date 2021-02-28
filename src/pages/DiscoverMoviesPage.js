@@ -46,8 +46,7 @@ export default function DiscoverMoviesPage() {
               <MovieItem
                 key={index}
                 title={movie.Title}
-                imd
-                bId={movie.imdbID}
+                imdbId={movie.imdbID}
                 year={movie.Year}
                 poster={movie.Poster}
               />
