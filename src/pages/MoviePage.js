@@ -20,8 +20,13 @@ export default function MoviePage() {
 
   return (
     <div>
-      <p>Some specific movie here </p>
-      <p>{imdb_id}</p>
+      <h2>
+        {movieData.Title} {movieData.Year}
+      </h2>
+      <p>{movieData.Genre}</p>
+      <img src={movieData.Poster} alt={`${movieData.Title}'s poster`} />
+      <p>IMDB Rating:</p>
+      <p>{movieData.imdbRating}</p>
     </div>
   );
 }
