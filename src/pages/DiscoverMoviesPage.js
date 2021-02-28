@@ -41,7 +41,13 @@ export default function DiscoverMoviesPage() {
           <h2>Search Results:</h2>
           <div>
             {movieState.map((movie, index) => (
-              <MovieItem key={index} title={movie.Title} />
+              <MovieItem
+                key={index}
+                title={movie.Title}
+                imdbId={movie.imdbID}
+                year={movie.Year}
+                poster={movie.Poster}
+              />
             ))}
           </div>
         </div>
